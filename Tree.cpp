@@ -3,7 +3,6 @@
 #include <cstring>
 #include "Tree.h"
 
-using namespace std;
 //Constructors
 Tree::Tree(int newVal){
     right = NULL;

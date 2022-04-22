@@ -12,7 +12,7 @@ void treeRemove(Tree* current, Tree* &head, Tree* parent, int data);
 
 
 int main(){
-Tree* tree; 
+Tree* tree = NULL; 
 char input[100];
 char input2[100];
 int input3 = 0;
@@ -20,7 +20,7 @@ int spacing = 3;
 char input4[100];
 bool running = true;
 while(running == true){
-cout << "Welcome to the Binary Search Tree! You can add numbers to the tree (ADD), print the tree (PRINT), delete numbers from the tree (DELETE), and search numbers in the tree (SEARCH)." << endl; 
+cout << "Welcome to the Binary Search Tree! You can add numbers to the tree (ADD), print the tree (PRINT), delete numbers from the tree (DELETE), and search numbers in the tree (SEARCH). To quit type 'Quit'." << endl; 
 cout << "As an aside, make sure you're not entering duplicate numbers (Ones you've already entered or have added via file). Valid entries include anything in the range from 1-999." << endl;    
 cin >> input;
     if(strcmp(input, "ADD") == 0){
@@ -29,9 +29,17 @@ cin >> input;
         if(strcmp(input2, "INPUT") == 0){
             cout << "Enter the number that you want to add to the tree." << endl;
             cin >> input3;
-            Tree* newNode = new Tree(input3);
-            treeAdd(newNode, tree, tree);
-        }
+	    /*
+	    if(search(tree, input3) == true){
+	      cout << "No duplicate numbers in the tree! Please enter another number." << endl;
+	    }
+	    else{
+	    */
+	    Tree* newNode = new Tree(input3);
+	    cout << "Does constructor work?" << endl;
+	    treeAdd(newNode, tree, tree);
+	    //}
+	    }
         else if(strcmp(input2, "FILE") == 0){
         int temp = 0;
         cout << "Enter a file name: (e.g. filename.txt)" << endl;
@@ -59,13 +67,18 @@ cin >> input;
         cout << "What's the number that you want to search for?" << endl;
         cin >> input3;
         search(tree, input3);
-        }  
+        }
+    else if(strcmp(input, "QUIT") == 0){
+      cout << "Thanks for using BST!" << endl;
+      running = false;
+    }
     }
 }
 
 void treeAdd(Tree* newNode, Tree* current, Tree* & head){
     if(head == NULL){
-    head = newNode;
+      cout << "Did we get here?" << endl;
+      head = newNode;
     return;
     }
     else if(newNode->getData() > current->getData()){ 
@@ -142,6 +155,7 @@ bool search(Tree* head, int input){
         cout << "Sorry, your number isn't in the tree." << endl;
         return false;
     }
+    return false;
 }
 
 void treeRemove(Tree* current, Tree* &head, Tree* parent, int data){
